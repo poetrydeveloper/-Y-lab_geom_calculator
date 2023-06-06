@@ -5,7 +5,8 @@ from calc.figure.triangle import Triangle
 from calc.figure.circle import Circle
 from calc.figure.rectangle import Rectangle
 from calc.figure.rhombus import Rhombus
-from  calc.figure.trapezoid import Trapezoid
+from calc.figure.trapezoid import Trapezoid
+from calc.figure.sphere import Sphere
 
 class Calculator:
     def __init__(self, figure_name=None):
@@ -23,6 +24,9 @@ class Calculator:
 
     def get_figure_info(self):
         match self.figure_name:
+            case "sphere":
+                self.active_figure = Sphere()
+                return ['radius',]
             case "trapezoid":
                 self.active_figure = Trapezoid()
                 return ['upper_side', 'down_side', 'height',]
@@ -45,7 +49,6 @@ class Calculator:
     def insert_param(self, args: list[int]) -> None:
         if self.active_figure:
             method_list = [method for method in dir(self.active_figure) if method.startswith('get')  is True]
-            print(method_list)
             try:
                 if self.active_figure.reassembly(args) > 0:
                     text = ''
@@ -56,7 +59,6 @@ class Calculator:
                         pre_string = f'{method} - {count}\n'
                         pre_string = pre_string.lstrip(sample)
                         text += pre_string
-
                     return text
             except:
                 return (f'Some Error. Check your input.')

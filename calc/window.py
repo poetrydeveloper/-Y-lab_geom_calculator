@@ -20,7 +20,8 @@ class Window:
             self.root.iconbitmap(icon)
 
         self.root['background'] = '#856ff8'
-        self.figures = Combobox(self.root, width=15, height=1, values=('trapezoid','rhombus','square', 'rectangle', "circle", "triangle",))
+        self.figures = Combobox(self.root, width=15, height=1, values=('sphere', 'trapezoid', 'rhombus', 'square',
+                                                                       'rectangle', "circle", "triangle",))
 
     def run(self):
         self.draw_widgets()

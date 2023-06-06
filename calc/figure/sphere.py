@@ -1,13 +1,13 @@
 import math
+from abc import ABC
 
 from calc.figure.figure import Figure
 
 
-class Circle(Figure):
-
+class Sphere(Figure):
     def __init__(self):
         self.__radius = None
-        self.circle = None
+        self.volume = None
         self.area = None
         self.diameter = None
 
@@ -23,7 +23,7 @@ class Circle(Figure):
         if not contain_zero:
             self.radius(args)
             self.calc_diameter()
-            self.calc_circle()
+            self.calc_volume()
             self.calc_area()
             return 1
         else:
@@ -36,13 +36,13 @@ class Circle(Figure):
         return self.diameter
 
     def calc_area(self) -> None:
-        self.area = round(math.pi * (self.__radius**2), 3)
+        self.area = round((4 * math.pi * (float(self.__radius) ** 2)), 3)
 
     def get_area(self) -> None:
         return self.area
 
-    def calc_circle(self):
-        self.circle = round((2 * math.pi * self.__radius),3)
+    def calc_volume(self):
+        self.volume = round(((4 / 3) * (math.pi * float(self.__radius) ** 3)),3)
 
-    def get_circle(self) -> None:
-        return self.circle
+    def get_volume(self) -> None:
+        return self.volume
