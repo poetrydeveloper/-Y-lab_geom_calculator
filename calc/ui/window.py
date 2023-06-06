@@ -1,8 +1,7 @@
 from tkinter import *
 from tkinter import ttk
 from tkinter.ttk import Combobox
-from calc.calculator import Calculator
-from PIL import Image, ImageTk
+from controler.calculator import Calculator
 
 
 class Window:
