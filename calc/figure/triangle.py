@@ -36,8 +36,6 @@ class Triangle(Figure):
             return 1
         else:
             return -1
-        return self.send_answer()
-
 
     def calc_perimeter(self) -> None:
         self.perimeter = self.__first_side + self.__second_side + self.__third_side

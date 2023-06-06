@@ -11,5 +11,3 @@ class Figure(ABC):
     @abstractmethod
     def get_area(self):
         pass
-
-

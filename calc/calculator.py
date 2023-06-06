@@ -1,6 +1,8 @@
 from typing import Any
 
+from calc.figure.square import Square
 from calc.figure.triangle import Triangle
+from calc.figure.circle import Circle
 
 
 class Calculator:
@@ -19,17 +21,32 @@ class Calculator:
 
     def get_figure_info(self):
         match self.figure_name:
-            case "Триугольник":
+            case "triangle":
                 self.active_figure = Triangle()
-                self.answers =["Площадь", "Периметр"]
-                return ["Первая сторона", "Вторая сторона", "Третья сторона"]
+                return ["first_side", "second_side", "third_side"]
+
+            case "square":
+                self.active_figure = Square()
+                return ["side",]
+
+            case "circle":
+                self.active_figure = Square()
+                return ["radius", ]
 
     def insert_param(self, args: list[int]) -> None:
         if self.active_figure:
+            # method_list = [method for method in dir(self.active_figure) if method.startswith('get')  is True]
+            # print(method_list)
+            #method_list = [method for method in dir(self.active_figure) if not method.startswith('get')  is True]
+            print ([arg for arg in dir(self.active_figure) if callable(getattr(self.active_figure, arg))])
+            #print(method_list2)
             try:
                 if self.active_figure.reassembly(args) > 0:
-                    print('все ок')
-                    return (f' {self.answers[0]} - {self.active_figure.get_area()} \n'
-                          f' {self.answers[1]} - {self.active_figure.get_perimeter()} ')
+                    text = ''
+                    for method in method_list:
+                        func = f'self.active_figure.{method}()'
+                        count = eval(func)
+                        text += f'{method} - {count}\n'
+                    return text
             except:
-                return (f'Ошибка')
+                return (f'Some Error. Check your input.')
