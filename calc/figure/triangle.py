@@ -24,8 +24,8 @@ class Triangle(Figure):
 
     def reassembly(self, args):
         contain_zero = 0
-        for str in args:
-            if float(str) <= 0:
+        for el in args:
+            if float(el) <= 0:
                 contain_zero += 1
         if not contain_zero:
             self.first_side(args)

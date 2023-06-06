@@ -7,6 +7,7 @@ from PIL import Image, ImageTk
 
 class Window:
     def __init__(self, width=600, height=500, title="Калькулятор", resizable=(False, False), icon="resources/icon.ico"):
+        self.props = None
         self.image = None
         self.answer = None
         self.entries = None
@@ -19,7 +20,7 @@ class Window:
             self.root.iconbitmap(icon)
 
         self.root['background'] = '#856ff8'
-        self.figures = Combobox(self.root, width=15, height=1, values=('square', "circle", "triangle",))
+        self.figures = Combobox(self.root, width=15, height=1, values=('trapezoid','rhombus','square', 'rectangle', "circle", "triangle",))
 
     def run(self):
         self.draw_widgets()
@@ -36,20 +37,18 @@ class Window:
         Label(self.root, width=25, height=1, text=f"Geometry: {figure}").place(relx=0.1, rely=0.27)
         self.image = PhotoImage(file=f"resources/{figure}.png")
         Label(self.root, image=self.image,).place(relx=0.6, rely=0.05)
-        # self.label_image.image = self.image
-
         self.create(figure)
 
     def create(self, figure):
         self.calc = Calculator(figure)
-        props = self.calc.get_figure_info()
-        self.draw_fields(props)
+        self.props = self.calc.get_figure_info()
+        self.draw_fields()
 
-    def draw_fields(self, props):
+    def draw_fields(self,):
         self.entries = []
         step = 0.1
         Label(self.root, width=15, height=1, text=f"Fill in these fields:").place(relx=0.1, rely=0.4)
-        for prop in props:
+        for prop in self.props:
             Label(self.root, width=15, height=1, text=f"{prop}").place(relx=0.1, rely=(0.4 + step))
             entry = ttk.Entry(self.root, width=15, )
             entry.place(relx=0.5, rely=(0.4 + step))
@@ -62,4 +61,4 @@ class Window:
         calc_args = list(map(lambda x: x.get(), self.entries))
         if self.calc:
             self.answer = self.calc.insert_param(calc_args)
-            Label(self.root, width=15, height=3, text=self.answer).place(relx=0.5, rely=0.75)
+            Label(self.root, width=35, height=5, text=self.answer).place(relx=0.4, rely=0.75)

@@ -17,8 +17,8 @@ class Circle(Figure):
 
     def reassembly(self, args):
         contain_zero = 0
-        for str in args:
-            if float(str) <= 0:
+        for el in args:
+            if float(el) <= 0:
                 contain_zero += 1
         if not contain_zero:
             self.radius(args)
@@ -36,13 +36,13 @@ class Circle(Figure):
         return self.diameter
 
     def calc_area(self) -> None:
-        self.area = math.pi * (self.__radius**2)
+        self.area = round(math.pi * (self.__radius**2), 3)
 
     def get_area(self) -> None:
         return self.area
 
     def calc_circle(self):
-        self.circle =  2 * math.pi * self.__radius
+        self.circle = round((2 * math.pi * self.__radius),3)
 
     def get_circle(self) -> None:
         return self.circle

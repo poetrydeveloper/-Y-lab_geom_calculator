@@ -32,7 +32,7 @@ class Square(Figure):
         return self.perimeter
 
     def calc_area(self) -> None:
-        self.area = self.__side ** 2
+        self.area = round((self.__side ** 2),3)
 
     def get_area(self) -> any:
         return self.area
