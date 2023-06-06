@@ -20,32 +20,31 @@ class Window:
             self.root.iconbitmap(icon)
 
         self.root['background'] = '#856ff8'
-        self.figures = Combobox(self.root, width=15, height=1, values=('sphere', 'trapezoid', 'rhombus', 'square',
-                                                                       'rectangle', "circle", "triangle",))
+        self.figures = Combobox(self.root, width=15, height=1, values=('cone','cube', 'cylinder', 'parallelepiped', 'pyramid', 'sphere', 'trapezoid', 'rhombus', 'square', 'rectangle', "circle", "triangle",))
 
-    def run(self):
+    def run(self) -> None:
         self.draw_widgets()
         self.root.mainloop()
 
-    def draw_widgets(self):
+    def draw_widgets(self) -> None:
         Label(self.root, width=15, height=1, text="Choose a geometry:").place(relx=0.1, rely=0.05)
         self.figures.current(0)
         self.figures.place(relx=0.1, rely=0.1)
-        Button(self.root, width=15, height=1, text="Enter", command=self.get_figure).place(relx=0.1, rely=0.2)
+        Button(self.root, width=15, height=1, text="Enter", command=self.draw_figure).place(relx=0.1, rely=0.2)
 
-    def get_figure(self):
+    def draw_figure(self):
         figure = self.figures.get()
         Label(self.root, width=25, height=1, text=f"Geometry: {figure}").place(relx=0.1, rely=0.27)
         self.image = PhotoImage(file=f"resources/{figure}.png")
         Label(self.root, image=self.image,).place(relx=0.6, rely=0.05)
-        self.create(figure)
+        self.create_figure(figure)
 
-    def create(self, figure):
+    def create_figure(self, figure):
         self.calc = Calculator(figure)
         self.props = self.calc.get_figure_info()
-        self.draw_fields()
+        self.draw_entries()
 
-    def draw_fields(self,):
+    def draw_entries(self, ):
         self.entries = []
         step = 0.1
         Label(self.root, width=15, height=1, text=f"Fill in these fields:").place(relx=0.1, rely=0.4)
@@ -56,9 +55,9 @@ class Window:
             self.entries.append(entry)
             step += 0.1
 
-        ttk.Button(text="ok", command=self.button_action).place(relx=0.174, rely=0.75)
+        ttk.Button(text="ok", command=self.draw_answer).place(relx=0.174, rely=0.75)
 
-    def button_action(self):
+    def draw_answer(self):
         calc_args = list(map(lambda x: x.get(), self.entries))
         if self.calc:
             self.answer = self.calc.insert_param(calc_args)

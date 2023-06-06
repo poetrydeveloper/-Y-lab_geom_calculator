@@ -12,7 +12,7 @@ class Square(Figure):
         if float(args[0]) > 0:
             self.__side = float(args[0])
 
-    def reassembly(self, args):
+    def reassembly(self, args) -> str:
         contain_zero = 0
         for el in args:
             if float(el) <= 0:
@@ -34,5 +34,5 @@ class Square(Figure):
     def calc_area(self) -> None:
         self.area = round((self.__side ** 2),3)
 
-    def get_area(self) -> any:
+    def get_area(self) -> float:
         return self.area

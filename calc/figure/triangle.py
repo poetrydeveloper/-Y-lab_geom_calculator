@@ -22,7 +22,7 @@ class Triangle(Figure):
         if float(args[2]) > 0:
             self.__third_side = float(args[2])
 
-    def reassembly(self, args):
+    def reassembly(self, args) -> str:
         contain_zero = 0
         for el in args:
             if float(el) <= 0:
@@ -40,13 +40,13 @@ class Triangle(Figure):
     def calc_perimeter(self) -> None:
         self.perimeter = self.__first_side + self.__second_side + self.__third_side
 
-    def get_perimeter(self)->any:
+    def get_perimeter(self)-> float:
         return self.perimeter
 
     def calc_area(self) -> None:
         p = self.perimeter / 2
         self.area = round(sqrt(p * (p - self.__first_side) * (p - self.__second_side) * (p - self.__third_side)), 3)
 
-    def get_area(self)->any:
+    def get_area(self)-> float:
         return self.area
 
